@@ -16,12 +16,12 @@ public:
 
         ListNode* temp=new ListNode(100);
         ListNode* temphead=temp;
-        if(list1==NULL){
-            return list2;
-        }
-        if(list2==NULL){
-            return list1;
-        }
+        // if(list1==NULL){
+        //     return list2;
+        // }
+        // if(list2==NULL){
+        //     return list1;
+        // }
         while(a!=NULL && b!=NULL){
             if(a->val<=b->val){
                 temp->next=a;
@@ -32,17 +32,14 @@ public:
             }
             temp=temp->next;
         }
-        while(a!=NULL){
+        if(a!=NULL){
             temp->next=a;
-            a=a->next;
-            temp=temp->next;
         }
-        while(b!=NULL){
+        if(b!=NULL){
             temp->next=b;
-            b=b->next;
-            temp=temp->next;
         }
-        temphead=temphead->next;
-        return temphead;
+    
+        return temphead->next;
+        
     }
 };
