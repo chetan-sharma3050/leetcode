@@ -8,39 +8,29 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
 class Solution {
 public:
-    ListNode* newnode(int value) {
-        ListNode* nn = new ListNode(value);
-        return nn;
-    }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-
-        ListNode* n1 = l1;
-        ListNode* n2 = l2;
-        int carry =0;
-        ListNode* dummynode = newnode(-1);
-        ListNode* curr = dummynode;
-        while(n1 != NULL || n2 != NULL){
-            int sum = carry;
-            if(n1) sum += n1->val;
-            if(n2) sum += n2->val;
-            ListNode* nn = newnode(sum%10);
-            carry = sum/10;
-            curr->next = nn;
-            curr = curr->next;
-            if(n1) n1 = n1->next;
-            if(n2) n2 = n2->next;
+        int sum=0; int carry=0;
+        ListNode* dummy= new ListNode ();
+        ListNode *temp=dummy;
+        while(l1!=nullptr||l2!=nullptr||carry!=0){
+            sum=0;
+            if(l1!=nullptr){
+                sum+=l1->val;
+                l1=l1->next;
+            }
+            if(l2!=nullptr){
+                sum+=l2->val;
+                l2=l2->next;
+            }
+            sum+=carry;
+            carry=sum/10;
+            ListNode*node=new ListNode(sum%10);
+            temp->next=node;
+            temp=temp->next;
         }
+        return dummy->next;
 
-        if(carry){
-            ListNode* nn = newnode (carry);
-            curr->next = nn;
-
-        }
-        return dummynode->next;
-
-        
     }
 };
